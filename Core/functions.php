@@ -19,7 +19,7 @@ function navStyle($value) {
 function abort($code = Response::NOT_FOUND) {
     http_response_code($code);
 
-    view("{$code}.php");
+    require base_path("views/{$code}.php");
 
     die();
 }

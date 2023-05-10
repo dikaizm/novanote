@@ -1,5 +1,5 @@
 <?php
 
 view("index.view.php", [
-    'heading' => 'Home'
+    'heading' => ($_SESSION['user'] ? 'Hello, ' . $_SESSION['user']['name'] : 'Welcome')
 ]);
