@@ -24,7 +24,7 @@ if (! empty($errors)) {
     ]);
 }
 
-$db =  App::resolve(Database::class);
+$db = App::resolve(Database::class);
 
 // check if the account already exists
 $user = $db->query('select * from users where email = :email and password = :password', [
@@ -46,8 +46,6 @@ if ($user) {
         $id = $userData['id'];
     }
 
-    // dd($userData);
-
     // if true, then login
     session_start();
     $_SESSION['user'] = [
@@ -55,8 +53,6 @@ if ($user) {
         'name' => $name,
         'id' => $id
     ];
-
-    // dd($_SESSION['user']);
 
     header('location: /');
     exit();

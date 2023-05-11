@@ -48,11 +48,26 @@ if ($user) {
         'password' => $password
     ]);
 
-    // mark that the user has login
-    session_start();
+    // initialize name and id
+    $name = null;
+    $id = null;
 
+    // get name and id
+    $userData = $db->query('SELECT name, id FROM users WHERE email = :email', [
+        'email' => $email,
+    ])->find();
+
+    if ($userData) {
+        $name = $userData['name'];
+        $id = $userData['id'];
+    }
+
+    // if true, then login
+    session_start();
     $_SESSION['user'] = [
         'email' => $email,
+        'name' => $name,
+        'id' => $id
     ];
 
     header('location: /');

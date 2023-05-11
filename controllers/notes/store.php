@@ -20,7 +20,8 @@ if (! empty($errors)) {
 }
 
 if (empty($errors)) {
-    $db->query('INSERT INTO notes(body, user_id) VALUES(:body, :user_id)', [
+    $db->query('INSERT INTO notes(title, body, user_id) VALUES(:title, :body, :user_id)', [
+        'title' => $_POST['title'],
         'body' => $_POST['body'],
         'user_id' => $_SESSION['user']['id'],
     ]);
