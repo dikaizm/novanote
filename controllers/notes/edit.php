@@ -8,12 +8,16 @@ $db = App::resolve(Database::class);
 $currentUserId = $_SESSION['user']['id'];
 
 $note = $db->query('select * from notes where id = :id', [
-    'id' => $_GET['id']
+    'id' => $_POST['id']
 ])->findOrFail();
 
 authorize($note['user_id'] == $currentUserId);
 
-view("notes/index.view.php", [
-    'errors' => [],
-    'note' => $note
-]);
+$response = [
+    'id' => $note['id'],
+    'title' => $note['title'],
+    'body' => $note['body']
+];
+
+echo json_encode($response);
+exit;

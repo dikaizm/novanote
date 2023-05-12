@@ -14,8 +14,8 @@ $notes = $db->query('select * from notes where user_id = :user_id', [
 
 $errors = [];
 
-if (! Validator::string($_POST['body'], 1, 1000)) {
-    $errors['body'] = 'Require a body text of no more than 1,000 characters.';
+if (! Validator::string($_POST['body'])) {
+    $errors['body'] = 'Require a body text';
 };
 
 if (! empty($errors)) {

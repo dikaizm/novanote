@@ -1,6 +1,7 @@
 <div 
-  class="modal-container
-        relative z-20 hidden" 
+  id="note-container"
+  style="display: none"
+  class="relative z-20" 
   aria-labelledby="modal-title" 
   role="dialog" 
   aria-modal="true">
@@ -34,48 +35,59 @@
       -->
       <div class="modal-panel
                   relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all my-8 w-full max-w-lg">
-        <!--- create note --->      
 
-<form method="POST" action="/notes">
+        <!--- update note --->      
 
-  <input type="hidden" name="_method" value="PATCH">
-  <input type="hidden" name="id" value="<?= $note['id'] ?>">
+<div>
+
+ 
+<form method="POST" action="note/update">
+
+<input type="hidden" name="_method" value="PATCH">
+  <input id="note-id-update" type="hidden" name="id" value="">
 
    <div class="w-full rounded-lg bg-gray-50">
       <div class="px-4 pt-2 bg-white rounded-t-lg">
             <label 
-              for="title"
+              for="note-title"
               class="sr-only"
-            ><?= $_POST['title'] ?? '' ?></label>
+            ></label>
             <textarea 
-              id="title"
-              name="title"
+              id="note-title"
+              name="note-title"
               rows="1" 
-              class="w-full px-0 py-1 text-gray-900 font-bold bg-white border-0 focus:ring-0 placeholder-gray-400 resize-none" 
-              placeholder="Title"></textarea>
+              class="w-full px-0 py-1 text-gray-900 font-bold bg-white border-0 focus:ring-0 placeholder-gray-400 resize-none truncate" 
+              placeholder="Title"
+              ><?= $_POST['title'] ?></textarea>
       </div>
        <div class="px-4 bg-white rounded-t-lg">
            <label 
-              for="body" 
+              for="note-body" 
               class="sr-only"
-              ><?= $_POST['body'] ?? '' ?></label>
+              ></label>
            <textarea 
-              id="body" 
-              name="body"
+              id="note-body" 
+              name="note-body"
               rows="8" 
               class="w-full px-0 py-0 text-sm text-gray-900 bg-white border-0  focus:ring-0 placeholder-gray-400" 
               placeholder="Write a note..." 
-              ></textarea>
+              ><?= $_POST['body'] ?></textarea>
        </div>
        <div class="flex items-center justify-between px-3 py-2 border-t border-gray-300">
         <div class="flex space-x-1">
-           <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
+           <button 
+              id="#note-update-btn"
+              data-id=""
+              type="submit" 
+              class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
            >Save note</button>
            <button 
+            id="note-close-btn"
             type="button" 
             class="modal-close
                   inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-gray-500 hover:text-gray-900"
             >Cancel</button>
+</form>
         </div>
            <div class="flex">
             <?php if(isset($errorsEdit['body'])) : ?>
@@ -95,10 +107,21 @@
                    <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
                    <span class="sr-only">Upload image</span>
                </button>
+
+               <form method="POST">
+
+                  <input type="hidden" name="_method" value="DELETE">
+                  <input id="note-id-delete" type="hidden" name="id" value="">
+
+                  <button class="inline-flex justify-center p-2 text-red-600 rounded cursor-pointer hover:text-white hover:bg-red-600 transition-all focus:text-white focus:bg-red-700">
+                      <svg class="w-5 h-5" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none" stroke="none"/><path d="M4 7h16"/><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/><path d="M10 12l4 4m0 -4l-4 4"/></svg>
+                      <span class="sr-only">Delete note</span>
+                  </button>
+               </form>
            </div>
        </div>
    </div>
-</form>
+  </div>
       </div>
     </div>
   </div>

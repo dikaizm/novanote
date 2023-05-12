@@ -1,0 +1,14 @@
+.fade-in {
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+.fade-out {
+    opacity: 0;
+    transition-property: opacity;
+    transition-duration: 500ms;
+    transition-timing-function: ease-in-out;
+    transition-delay: 300ms;
+}
