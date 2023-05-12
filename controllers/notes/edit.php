@@ -13,8 +13,7 @@ $note = $db->query('select * from notes where id = :id', [
 
 authorize($note['user_id'] == $currentUserId);
 
-view("notes/edit.view.php", [
-    'heading' => 'Edit Note',
+view("notes/index.view.php", [
     'errors' => [],
     'note' => $note
 ]);

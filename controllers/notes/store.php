@@ -6,6 +6,12 @@ use Core\Database;
 
 $db = App::resolve(Database::class);
 
+$currentUserId = $_SESSION['user']['id'];
+
+$notes = $db->query('select * from notes where user_id = :user_id', [
+    'user_id' => $currentUserId
+])->get();
+
 $errors = [];
 
 if (! Validator::string($_POST['body'], 1, 1000)) {
@@ -13,9 +19,9 @@ if (! Validator::string($_POST['body'], 1, 1000)) {
 };
 
 if (! empty($errors)) {
-    return view("notes/create.view.php", [
-        'heading' => 'Create Note',
-        'errors' => $errors
+    return view("notes/index.view.php", [
+        'errors' => $errors,
+        'notes' => $notes
     ]);
 }
 

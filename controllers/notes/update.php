@@ -14,23 +14,23 @@ $note = $db->query('select * from notes where id = :id', [
 
 authorize($note['user_id'] == $currentUserId);
 
-$errors = [];
+$errorsEdit = [];
 
 if (! Validator::string($_POST['body'], 1, 1000)) {
-    $errors['body'] = 'Require a body text of no more than 1,000 characters.';
+    $errorsEdit['body'] = 'Require a body text of no more than 1,000 characters.';
 };
 
-if (count($errors)) {
-    return view('notes/edit.view.php', [
-        'heading' => 'Edit Note',
-        'errors' => $errors,
+if (count($errorsEdit)) {
+    return view('notes/index.view.php', [
+        'errors' => $errorsEdit,
         'note' => $note
     ]);
 }
 
-$db->query('update notes set body = :body where id = :id', [
-    'id' => $_POST['id'],
+$db->query('INSERT INTO notes(title, body, user_id) VALUES(:title, :body, :user_id)', [
+    'title' => $_POST['title'],
     'body' => $_POST['body'],
+    'user_id' => $_SESSION['user']['id'],
 ]);
 
 header('location: /notes');
