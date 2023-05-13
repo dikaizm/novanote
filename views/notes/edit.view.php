@@ -40,10 +40,10 @@
 <div>
 
  
-<form method="POST" action="note/update">
+<form method="POST" id="edit-form">
 
-<input type="hidden" name="_method" value="PATCH">
-  <input id="note-id-update" type="hidden" name="id" value="">
+<!-- <input type="hidden" name="_method" value="PATCH">
+  <input id="note-id-update" type="hidden" name="id" value=""> -->
 
    <div class="w-full rounded-lg bg-gray-50">
       <div class="px-4 pt-2 bg-white rounded-t-lg">
@@ -72,13 +72,16 @@
               ></textarea>
        </div>
        <div class="flex items-center justify-between px-3 py-2 border-t border-gray-300">
+       
         <div class="flex space-x-1">
+        <a href="#all">
            <button 
-              id="#note-update-btn"
+              id="note-update-btn"
               data-id=""
-              type="submit" 
+               
               class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800"
            >Save note</button>
+</a>
            <button 
             id="note-close-btn"
             type="button" 

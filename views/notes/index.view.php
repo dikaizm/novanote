@@ -6,11 +6,12 @@
 <div class="p-3 sm:ml-64">
 <div class="p-3 mt-16 sm:mt-14">
 
+
 <!--- create note --->      
 <div class="mb-6">
 <form method="POST" action="/notes">
-   <div class="w-full border border-gray-200 rounded-lg bg-gray-50 border-gray-300">
-      <div class="px-4 pt-2 bg-white rounded-t-lg">
+   <div  class="w-full border border-gray-200 rounded-lg bg-gray-50 border-gray-300">
+      <div class="create-note px-4 pt-2 bg-white rounded-t-lg">
             <label 
               for="title"
               class="sr-only"
@@ -60,31 +61,27 @@
 </div>
 
 <!--- notes card --->
-<div class="columns-2 lg:columns-3 xl:columns-4">
+<div 
+    id="notes-container"
+    class="columns-2 lg:columns-3 xl:columns-4">
     <?php foreach ($notes as $index => $note) : ?>
 
-<!--- NEED TO FIX
-    <a 
-        id="note-view-btn-<?= $index ?>"
-        data-id="<?= $note['id'] ?>"
-        href="#edit/<?= $note['id'] ?>">
---->
         <div class="rounded break-inside-avoid mb-4">
         <div 
             id="note-card-<?= $index ?>"
             class="note-card w-full h-min max-h-96 flex flex-col justify-between bg-blue-300 rounded-lg pt-4 pb-3 px-4 hover:bg-blue-400 hover:transform hover:scale-[1.02] transition-transform">
             <div>
-                <h4 class="font-bold mb-3 <?= htmlspecialchars($note['title']) != null ? "text-gray-800" : "text-gray-800/50" ?>"><?= htmlspecialchars($note['title']) != null ? htmlspecialchars($note['title']) : "Untitled" ?></h4>
+                <h4 class="font-bold mb-3 <?= htmlspecialchars_decode($note['title']) != null ? "text-gray-800" : "text-gray-800/50" ?>"><?= htmlspecialchars_decode($note['title']) != null ? htmlspecialchars_decode($note['title']) : "Untitled" ?></h4>
                 <p 
                     class="text-gray-800 text-sm text-ellipsis overflow-hidden line-clamp-6 md:line-clamp-[12]"
                     
-                    ><?= htmlspecialchars($note['body']) ?></p>
+                    ><?= htmlspecialchars_decode($note['body']) ?></p>
             </div>
            
             
                 <div 
                     id="note-attr-<?= $index ?>"
-                    class="flex items-center justify-between text-gray-800 mt-3 fade-out">
+                    class="note-attr flex items-center justify-between text-gray-800 mt-3 fade-out">
                     <p class="text-xs"><?= htmlspecialchars(date('F j, Y', strtotime($note['date']))) ?></p>
 
                     <a href="#edit/<?= $note['id'] ?>">
@@ -107,8 +104,6 @@
         </div>
         
         </div>
-        </a>
-        
     <?php endforeach ?>
 </div>
 

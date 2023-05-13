@@ -7,12 +7,13 @@ $router->get('/contact', 'controllers/contact.php');
 $router->get('/notes', 'controllers/notes/index.php')->only('auth');
 $router->post('/notes', 'controllers/notes/store.php');
 
-// $router->get('/note', 'controllers/notes/show.php');
+$router->get('/notes/all', 'controllers/notes/show.php');
 $router->delete('/notes', 'controllers/notes/destroy.php');
 
 $router->post('/note/edit', 'controllers/notes/edit.php');
-$router->patch('/note/update', 'controllers/notes/update.php');
+$router->post('/note/update', 'controllers/notes/update.php');
 
+// $router->patch('/note/update', 'controllers/notes/update.php');
 // $router->get('/notes/create', 'controllers/notes/create.php');
 // $router->post('/notes', 'controllers/notes/store.php');
 

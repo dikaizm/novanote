@@ -1,108 +1,128 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Notes card interaction
-    let noteCard = document.querySelectorAll('.note-card')
+function all() 
+{
+    $.ajax({
+        type: 'GET',
+        url: 'notes/all',
+        success: function () {
+            console.log('update data success!')
+        }
+    })
+}
 
-    // Loop note card
-    noteCard.forEach((noteCard, index) => {
-        // Show/hide card attribute
-        noteCard.addEventListener('mouseenter', () => {
-            const noteAttr = document.getElementById(`note-attr-${index}`);
-            noteAttr.classList.remove('fade-out');
-            noteAttr.classList.add('fade-in');
+function resetForm(selector) 
+{
+    $(selector)[0].reset();
+}
+
+// Modal function
+function editNote(name) { 
+        const id = $(name).data('id');
+
+        $.ajax({
+            type: 'POST',
+            url: 'note/edit',
+            data: { id: id },
+            success: function (response) {
+                let note = JSON.parse(response);
+
+                // Pass data into note modal
+                $('#note-id-update').val(note.id);
+                $('#note-update-btn').data('id', note.id);
+                $('#note-id-delete').val(note.id);
+                $('#note-title').val(note.title);
+                $('#note-body').val(note.body);
+                
+                // Show modal
+                $('#note-container').show();
+
+                // Open modal effect
+                $('.modal-backdrop').toggleClass('fade-out');
+                $('.modal-backdrop').toggleClass('fade-in');
+
+                // Close modal effect
+                $('.modal-panel').toggleClass('fade-out');
+                $('.modal-panel').toggleClass('fade-in');
+            }
         });
-    
-        noteCard.addEventListener('mouseleave', () => {
-            const noteAttr = document.getElementById(`note-attr-${index}`);
-            noteAttr.classList.add('fade-out');
-            noteAttr.classList.remove('fade-in');
-        });
+}
 
-        // Pass data into note modal #SHOW
-        $(document).ready(function () {
-            $(`#note-edit-btn-${index}`).click(function () {
-              const id = $(this).data('id');
-              $.ajax({
-                url: 'note/edit',
-                type: 'post',
-                data: { id: id },
-                success: function (response) {
-                    let note = JSON.parse(response);
+function closeModal() {
+    const modalContainer = document.getElementById("note-container");
 
-                    $('#note-id-update').val(note.id);
-                    $('#note-update-btn').data('id', note.id);
-                    $('#note-id-delete').val(note.id);
-                    $('#note-title').val(note.title);
-                    $('#note-body').val(note.body);
-                    
-                    openModal()
-                }
-              });
-            });
-        });
-
-        // Pass data into note modal #PATCH
-        // $(document).ready(function () {
-        //     $('#note-update-btn').click(function () {
-        //       const id = $(this).data('id');
-        //       $.ajax({
-        //         url: 'note/update',
-        //         type: 'post',
-        //         data: { id: id },
-        //         success: function (response) {
-        //             let note = JSON.parse(response);
-
-        //             $('#note-id-update').val(note.id);
-        //             $('#note-update-btn').data('id', note.id);
-        //             $('#note-id-delete').val(note.id);
-        //             $('#note-title').html(note.title);
-        //             $('#note-body').html(note.body);
-
-        //             $('#note-container').show();
-        //         }
-        //       });
-        //     });
-        // });
+    $('#note-container').on('click', '#note-close-btn', function () {
+        $('#note-body').val('')
     });
 
-    // Modal interaction
-    const modalContainer = document.getElementById("note-container");
+    $('.modal-backdrop').toggleClass('fade-in');
+    $('.modal-backdrop').toggleClass('fade-out');
+    $('.modal-panel').toggleClass('fade-in');
+    $('.modal-panel').toggleClass('fade-out');
+
+    modalContainer.style.display = 'none'
+}
+
+
+// Execute function when finished loading the page
+document.addEventListener('DOMContentLoaded', function() {
+
+    $('#notes-container')
+        .on('mouseenter', '.note-card', function() {
+            $(this).find('.note-attr').addClass('fade-in').removeClass('fade-out')
+        })
+        .on('mouseleave', '.note-card', function() {
+            $(this).find('.note-attr').addClass('fade-out').removeClass('fade-in');
+        })
+        .on('click', 'button', function() {
+            editNote($(this));
+        })
+
+// -------------------------------------
 
     // Autosize textarea
     autosize($('#body'));
     autosize($('#note-body'));
 
-    // Modal function
-    function openModal() {
-        $('#note-container').show();
-
-        $('.modal-backdrop').toggleClass('fade-out');
-        $('.modal-backdrop').toggleClass('fade-in');
-
-        $('.modal-panel').toggleClass('fade-out');
-        $('.modal-panel').toggleClass('fade-in');
-    }
-
-    function closeModal() {
-        $('#note-container').on('click', '#note-close-btn', function () {
-            $('#note-body').val('')
-        });
-
-        $('.modal-backdrop').toggleClass('fade-in');
-        $('.modal-backdrop').toggleClass('fade-out');
-        $('.modal-panel').toggleClass('fade-in');
-        $('.modal-panel').toggleClass('fade-out');
-
-        modalContainer.style.display = 'none'
-    }
-
     // Close note modal
-    const noteClose = document.getElementById('note-close-btn');
-    noteClose.addEventListener('click', closeModal)    
+    $('#note-close-btn').on('click', closeModal)
 
-    // Close note escape
-    document.addEventListener('keydown', event => {
+    $(document).on('keydown', event => {
         if (event.key === 'Escape') {
             closeModal()
         }
     });
-});
+
+    // Submit updated input data
+    $('#note-title, #note-body').on('input', function() {
+        let inputTitle = $('#note-title').val()
+        let inputBody = $('#note-body').val()
+
+        inputData = {
+            'title': inputTitle,
+            'body': inputBody
+        }
+        
+        $('#note-update-btn').click(function(event) {
+            event.preventDefault();
+
+            const id = $('#note-update-btn').data('id');
+
+            $.ajax({
+                type: 'POST',
+                url: 'note/update',
+                data: { 
+                    id: id,
+                    inputData: JSON.stringify(inputData)
+                },
+                success: function () {
+                    $('#notes-container').load(location.href + ' #notes-container > *');
+
+                    closeModal()
+                }
+            })
+        })
+    })
+
+/// ----------------------------------------------
+
+
+})
