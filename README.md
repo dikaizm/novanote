@@ -1,4 +1,4 @@
-# SimpleNoteDika
+# SimpleNote
 
 This repository contains the code for the SimpleNoteDika website, a web application for creating and managing notes online.
 
