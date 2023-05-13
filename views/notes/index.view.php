@@ -31,7 +31,7 @@
               id="body" 
               name="body"
               rows="3" 
-              class="w-full px-0 py-0 text-sm text-gray-900 bg-white border-0  focus:ring-0 placeholder-gray-400" 
+              class="w-full px-0 py-0 text-sm text-gray-900 bg-white border-0  focus:ring-0 placeholder-gray-400 resize-none max-h-[60vh]" 
               placeholder="Write a note..." 
               ><?= $_POST['body'] ?? '' ?></textarea>
        </div>
@@ -86,10 +86,6 @@
                     id="note-attr-<?= $index ?>"
                     class="flex items-center justify-between text-gray-800 mt-3 fade-out">
                     <p class="text-xs"><?= htmlspecialchars(date('F j, Y', strtotime($note['date']))) ?></p>
-
-                    <p class="text-red-800 text-sm">
-                  Test <?php echo $note['id']; ?>
-                  </p>
 
                     <a href="#edit/<?= $note['id'] ?>">
                         <button 

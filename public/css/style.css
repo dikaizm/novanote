@@ -12,3 +12,7 @@
     transition-timing-function: ease-in-out;
     transition-delay: 300ms;
 }
+
+.autosize {
+    height: auto
+}

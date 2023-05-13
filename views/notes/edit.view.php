@@ -17,11 +17,10 @@
   -->
   <div 
     class="modal-backdrop
-          fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+          fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity fade-out"></div>
 
   <div 
-    class="modal-panel
-          fixed inset-0 z-10 overflow-y-auto">
+    class="fixed inset-0 z-10 overflow-y-auto transition-opacity">
     <div class="flex min-h-full items-center justify-center p-4 text-center">
       <!--
         Modal panel, show/hide based on modal state.
@@ -34,7 +33,7 @@
           To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
       -->
       <div class="modal-panel
-                  relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all my-8 w-full max-w-lg">
+                  relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all my-8 w-full max-w-lg fade-out">
 
         <!--- update note --->      
 
@@ -58,7 +57,7 @@
               rows="1" 
               class="w-full px-0 py-1 text-gray-900 font-bold bg-white border-0 focus:ring-0 placeholder-gray-400 resize-none truncate" 
               placeholder="Title"
-              ><?= $_POST['title'] ?></textarea>
+              ></textarea>
       </div>
        <div class="px-4 bg-white rounded-t-lg">
            <label 
@@ -68,10 +67,9 @@
            <textarea 
               id="note-body" 
               name="note-body"
-              rows="8" 
-              class="w-full px-0 py-0 text-sm text-gray-900 bg-white border-0  focus:ring-0 placeholder-gray-400" 
+              class="w-full px-0 py-0 text-sm text-gray-900 bg-white border-0 focus:ring-0 placeholder-gray-400 h-64 max-h-[75vh]" 
               placeholder="Write a note..." 
-              ><?= $_POST['body'] ?></textarea>
+              ></textarea>
        </div>
        <div class="flex items-center justify-between px-3 py-2 border-t border-gray-300">
         <div class="flex space-x-1">
