@@ -1,6 +1,6 @@
 # SimpleNote
 
-This repository contains the code for the SimpleNoteDika website, a web application for creating and managing notes online.
+This repository contains the code for the SimpleNote website, a web application for creating and managing notes online.
 
 ## Live Demo
 
