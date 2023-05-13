@@ -71,7 +71,7 @@
             id="note-card-<?= $index ?>"
             class="note-card w-full h-min max-h-96 flex flex-col justify-between bg-blue-300 rounded-lg pt-4 pb-3 px-4 hover:bg-blue-400 hover:transform hover:scale-[1.02] transition-transform">
             <div>
-                <h4 class="font-bold mb-3 <?= htmlspecialchars_decode($note['title']) != null ? "text-gray-800" : "text-gray-800/50" ?>"><?= htmlspecialchars_decode($note['title']) != null ? htmlspecialchars_decode($note['title']) : "Untitled" ?></h4>
+                <h4 class="text-ellipsis overflow-hidden line-clamp-2 font-bold mb-3 <?= htmlspecialchars_decode($note['title']) != null ? "text-gray-800" : "text-gray-800/50" ?>"><?= htmlspecialchars_decode($note['title']) != null ? htmlspecialchars_decode($note['title']) : "Untitled" ?></h4>
                 <p 
                     class="text-gray-800 text-sm text-ellipsis overflow-hidden line-clamp-6 md:line-clamp-[12]"
                     
