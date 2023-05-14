@@ -13,11 +13,8 @@ $note = $db->query('select * from notes where id = :id', [
 
 authorize($note['user_id'] == $currentUserId);
 
-// dd("deleted");
-
 $db->query('delete from notes where id = :id', [
     'id' => $_POST['id'],
 ]);
 
-header('location: /notes');
-exit();
+die();

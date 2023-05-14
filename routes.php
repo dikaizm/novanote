@@ -5,10 +5,10 @@ $router->get('/about', 'controllers/about.php');
 $router->get('/contact', 'controllers/contact.php');
 
 $router->get('/notes', 'controllers/notes/index.php')->only('auth');
-$router->post('/notes', 'controllers/notes/store.php');
+$router->post('/note/create', 'controllers/notes/create.php');
 
 $router->get('/notes/all', 'controllers/notes/show.php');
-$router->delete('/notes', 'controllers/notes/destroy.php');
+$router->post('/note/delete', 'controllers/notes/destroy.php');
 
 $router->post('/note/edit', 'controllers/notes/edit.php');
 $router->post('/note/update', 'controllers/notes/update.php');

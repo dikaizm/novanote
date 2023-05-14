@@ -18,9 +18,13 @@
       </button>
     </div>
     
-    <div class="hidden lg:flex lg:gap-x-12">
-      <div class="relative">
-        <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false" onclick="document.getElementById('product-dropdown').classList.toggle('hidden')">
+    <div id="nav-menu" class="hidden lg:flex lg:gap-x-12">
+      <div id="menu-item" class="relative">
+        <div 
+          id="menu-area"
+          style="display: none" 
+          class="absolute w-full py-6 opacity-0"></div>
+        <button type="button" class="flex items-center gap-x-1 text-sm font-semibold leading-6 text-gray-900" aria-expanded="false">
           Product
           <svg class="h-5 w-5 flex-none text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
             <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -37,7 +41,10 @@
             From: "opacity-100 translate-y-0"
             To: "opacity-0 translate-y-1"
         -->
-        <div class="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5 <?= $isOpen ? '' : 'hidden'; ?>" id="product-dropdown">
+        <div 
+          id="product-dropdown"
+          style="display: none"  
+          class="transition-opacity ease-out duration-300 opacity-0 absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
           <div class="p-4">
             <div class="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm leading-6 hover:bg-gray-50">
               <div class="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
@@ -94,9 +101,9 @@
       <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
     </div>
     <?php if (! $_SESSION['user']) : ?>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-      <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
-    </div>
+      <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+        <a href="/login" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
+      </div>
     
     <?php else : ?>
       <div class="relative ml-3 hidden lg:flex lg:flex-1 lg:justify-end">

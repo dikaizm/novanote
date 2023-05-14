@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Note App</title>
+    
     <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
 
     <link rel="stylesheet" href="css/style.css">
