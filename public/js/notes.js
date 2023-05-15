@@ -4,7 +4,8 @@ function resetForm(selector) {
 
 // ----------------- Modal function ------------------
 
-function createNote(form) {
+// Parse string to JSON
+function parseStrToJson(form) {
     let inputData = $(form).serialize();
 
     let decodeStr = decodeURIComponent(inputData)
@@ -19,11 +20,18 @@ function createNote(form) {
         json[key] = value;
     });
 
+    return json;
+}
+
+
+function createNote(form) {
+    inputForm = parseStrToJson(form)
+
     $.ajax({
         type: 'POST',
         url: 'note/create',
         data: {
-            inputData: JSON.stringify(json)
+            inputData: JSON.stringify(inputForm)
         },
         success: function (response) {
             let status = JSON.parse(response);
@@ -75,35 +83,23 @@ function closeModal() {
     resetForm('#edit-form');
 }
 
-function updateNote() {
-    let inputTitle = $('#note-title').val()
-    let inputBody = $('#note-body').val()
+function updateNote(form) {
+    inputForm = parseStrToJson(form)
 
-    inputData = {
-        'title': inputTitle,
-        'body': inputBody
-    }
+    const id = $('#note-update-btn').data('id');
 
-    console.log(inputData)
+    $.ajax({
+        type: 'POST',
+        url: 'note/update',
+        data: {
+            id: id,
+            inputData: JSON.stringify(inputForm)
+        },
+        success: function () {
+            $('#notes-container').load(location.href + ' #notes-container > *');
 
-    $('#note-update-btn').click(function (event) {
-        event.preventDefault();
-
-        const id = $('#note-update-btn').data('id');
-
-        $.ajax({
-            type: 'POST',
-            url: 'note/update',
-            data: {
-                id: id,
-                inputData: JSON.stringify(inputData)
-            },
-            success: function () {
-                $('#notes-container').load(location.href + ' #notes-container > *');
-
-                closeModal();
-            }
-        })
+            closeModal();
+        }
     })
 }
 
@@ -163,8 +159,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Submit updated input data
-    $('#note-title, #note-body').on('input', updateNote)
+    // Update note when submit
+    $('#edit-form').on('submit', function (event) {
+        event.preventDefault();
+        updateNote(this);
+    });
 
     // Delete note modal
     $('#note-delete-btn').on('click', deleteNote)

@@ -17,8 +17,8 @@ $inputData = json_decode($_POST['inputData'], true);
 
 $db->query('UPDATE notes SET title = :title, body = :body WHERE id = :id', [
     'id' => $_POST['id'],
-    'title' => $inputData['title'],
-    'body' => $inputData['body'],
+    'title' => $inputData['note-title'],
+    'body' => $inputData['note-body'],
 ]);
 
 die();

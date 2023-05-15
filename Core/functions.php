@@ -8,13 +8,18 @@ function dd($value) {
     die();
 };
 
-function navStyle($value) {
-    if ($_SERVER['REQUEST_URI'] == $value) {
-        return 'bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium'; 
-    } else {
-        return 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium';
-    };
-};
+function testResponse($value) {
+    $response = json_encode($value);
+    echo $response;
+}
+
+// function navStyle($value) {
+//     if ($_SERVER['REQUEST_URI'] == $value) {
+//         return 'bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium'; 
+//     } else {
+//         return 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium';
+//     };
+// };
 
 function abort($code = Response::NOT_FOUND) {
     http_response_code($code);
