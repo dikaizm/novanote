@@ -15,8 +15,8 @@
             </svg>
          </button>
         <a href="/" class="flex ml-2 md:mr-24">
-          <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
-          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Notes</span>
+          <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" class="h-8 mr-3" alt="FlowBite Logo" />
+          <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Novanote</span>
         </a>
       </div>
       <div class="flex items-center">

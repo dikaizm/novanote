@@ -54,7 +54,7 @@ if ($user) {
         'id' => $id
     ];
 
-    header('location: /');
+    header('location: /notes');
     exit();
 } else {
     // else alert for invalid email or unmatched password

@@ -15,6 +15,10 @@
           <div class="create-note px-4 pt-2 bg-white rounded-t-lg">
             <label for="title" class="sr-only"></label>
             <textarea id="create-note-title" name="title" rows="1" class="w-full px-0 py-1 text-gray-900 font-bold bg-white border-0 focus:ring-0 placeholder-gray-400 resize-none" placeholder="Title"></textarea>
+            <!-- 
+            <input id="x" type="hidden" name="content">
+            <trix-editor input="x"></trix-editor>
+             -->
           </div>
           <div class="px-4 bg-white rounded-t-lg">
             <label for="body" class="sr-only"></label>

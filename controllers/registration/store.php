@@ -70,6 +70,6 @@ if ($user) {
         'id' => $id
     ];
 
-    header('location: /');
+    header('location: /notes');
     exit();
 }
